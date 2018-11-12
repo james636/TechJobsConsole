@@ -17,7 +17,7 @@ namespace TechJobsConsole
             // Column options
             Dictionary<string, string> columnChoices = new Dictionary<string, string>();
             columnChoices.Add("core competency", "Skill");
-            columnChoices.Add("employer", "Employer");
+            columnChoices.Add("cmployer", "Employer");
             columnChoices.Add("location", "Location");
             columnChoices.Add("position type", "Position Type");
             columnChoices.Add("all", "All");
@@ -63,13 +63,13 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
                     }
+                    PrintJobs(searchResults);
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace TechJobsConsole
 
                 if (choiceIdx < 0 || choiceIdx >= choiceKeys.Length)
                 {
-                    Console.WriteLine("Invalid choices. Try again.");
+                    Console.WriteLine("Invalid choice. Try again.");
                 }
                 else
                 {
@@ -118,7 +118,22 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("Your search yielded no result!");
+            }
+            else
+            {
+                foreach (Dictionary<string, string> job in someJobs)
+                {
+                    Console.WriteLine("MMMMMMMMMMMMMMMMMM");
+                    foreach (var pair in job)
+                    {
+                        Console.WriteLine(pair.Key + ": " + pair.Value);
+                    }
+                    Console.WriteLine("WWWWWWWWWWWWWWWWWW\n");
+                }
+            }
         }
     }
 }
